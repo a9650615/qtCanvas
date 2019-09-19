@@ -7,14 +7,28 @@ import Qt3D.Render 2.0
 import Qt3D.Input 2.0
 import Qt3D.Extras 2.0
 
+// custom element
+
+import io.qt.colormarker 1.0
+
 ApplicationWindow
 {
     id: applicationWindow
     visible: true
     width: 640
     height: 480
-    title: qsTr("Qml window")
+    title: qsTr("hello")
 
+    ColorMarker {
+        id: colorMarker
+    }
+
+    Text {
+        id: element
+        text: qsTr(colorMarker.appName)
+        font.pixelSize: 12
+        z: 10
+    }
 
     Rectangle {
         id: rectangle
@@ -65,12 +79,18 @@ ApplicationWindow
                 }
             }
 
+            Scene3D {
+                anchors.fill: parent
+                aspects: ["render", "logic", "input"]
+            }
+
 //            Scene3D {
 //                aspects: ["input", "logic"]
 //                cameraAspectRatioMode: Scene3D.AutomaticAspectRatio
-//            }
+            //            }
         }
     }
+
 
 }
 
@@ -78,6 +98,6 @@ ApplicationWindow
 
 /*##^##
 Designer {
-    D{i:2;anchors_height:0;anchors_width:0}D{i:1;anchors_height:200;anchors_width:200;anchors_x:1;anchors_y:0}
+    D{i:1;anchors_height:200;anchors_width:200;anchors_x:1;anchors_y:0}D{i:3;anchors_height:0;anchors_width:0}
 }
 ##^##*/
