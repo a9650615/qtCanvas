@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.0
 import QtQuick.Scene3D 2.0
+import QtMultimedia 5.9
 
 import Qt3D.Core 2.0
 import Qt3D.Render 2.0
@@ -15,9 +16,9 @@ ApplicationWindow
 {
     id: applicationWindow
     visible: true
-    width: 640
+    width: 720
     height: 480
-    title: qsTr("hello")
+    title: qsTr("Hello window")
 
     ColorMarker {
         id: colorMarker
@@ -45,7 +46,8 @@ ApplicationWindow
         Column {
             spacing: 1
             anchors.fill: parent
-            Canvas {
+
+            Item {
                 id: cameraView
                 anchors.right: parent.right
                 anchors.rightMargin: 0
@@ -55,11 +57,36 @@ ApplicationWindow
                 anchors.bottomMargin: 0
                 anchors.top: parent.top
                 anchors.topMargin: 0
-                onPaint: {
-                    var ctx = getContext('2d');
-                    ctx.fillStyle = Qt.rgba(1, 0, 0, 1);
-                    ctx.fillRect(0, 0, width, height);
+                Camera {
+                    id: camera
+                    captureMode: Camera.
+//                    imageProcessing.whiteBalanceMode: CameraImageProcessing.WhiteBalanceFlash
+
+//                    exposure {
+//                        exposureCompensation: -1.0
+//                        exposureMode: Camera.ExposurePortrait
+//                    }
+
+//                    flash.mode: Camera.FlashRedEyeReduction
+
+//                    imageCapture {
+//                        onImageCaptured: {
+//                            photoPreview.source = preview  // Show the preview in an Image
+//                        }
+//                    }
                 }
+
+                VideoOutput {
+                    source: camera
+                    anchors.fill: parent
+                    focus : visible // to receive focus and capture key events when visible
+//                    autoOrientation : false
+                }
+//                onPaint: {
+//                    var ctx = getContext('2d');
+//                    ctx.fillStyle = Qt.rgba(1, 0, 0, 1);
+//                    ctx.fillRect(0, 0, width, height);
+//                }
             }
 
             Canvas {
